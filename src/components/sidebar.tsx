@@ -1,18 +1,19 @@
 import { images } from "@/assets";
 import { routesPath } from "@/utils";
 import useWindowSize from "@/utils/hooks/useWindowSize";
-import { useEffect } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { ArrowLeftRight, CircleDollarSign, LayoutDashboard, LogOutIcon, Mail, Settings, Star, TrendingUp, User, Users } from "lucide-react"
+import { useEffect, useState } from "react";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { ArrowLeftRight, ChevronDown, ChevronUp, CircleDollarSign, LayoutDashboard, LogOutIcon, Mail, Settings, Star, TrendingUp, User, Users } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 interface IProps {
     showSidebar: any;
     setShowSidebar: (state: any) => any;
 }
 
-const { DASHBOARD, KYC, SUPPORT, ALL_SETTLEMENTS, RECONCILIATION, USERS, REPORT, TRANSACTIONS, SETTINGS, APP_FEEDBACK } = routesPath
+const { DASHBOARD, KYC, SUPPORT, SETTLEMENTS, ALL_SETTLEMENTS, RECONCILIATION, USERS, REPORT, TRANSACTIONS, SETTINGS, APP_FEEDBACK } = routesPath
 
 const navigationPath = [
     {
@@ -40,7 +41,7 @@ const navigationPath = [
         id: 4,
         title: 'Settlements',
         icon: <CircleDollarSign className="w-4 h-4" />,
-        path: '',
+        path: SETTLEMENTS,
         subLinks: [
             {
                 id: 1,
@@ -91,12 +92,13 @@ const navigationPath = [
     },
 
 ]
-console.log(location.pathname)
-console.log(navigationPath[0].path)
+
 const Sidebar = ({ setShowSidebar, showSidebar }: IProps) => {
+    const [collapsible, setCollapsible] = useState({ path: '', collapsed: false })
+
     const { width } = useWindowSize()
     const navigate = useNavigate()
-
+    console.log(collapsible)
     const defaultLink = 'block text-grey-500 pl-8 dark:text-slate-400 dark:hover:text-slate-300 hover:bg-secondary hover:text-whit hover:p-3 hover:pl-8 hover:rounded-[8px]'
     const activeLink = 'block text-white bg-primary rounded-[8px] pl-8 dark:text-slate-300'
 
@@ -124,16 +126,71 @@ const Sidebar = ({ setShowSidebar, showSidebar }: IProps) => {
                     <div className="h-[60%] overflow-y-scroll">
                         {
                             navigationPath.map((navigation) => (
-                                <NavLink
-                                    key={navigation.id}
-                                    to={navigation.path}
-                                    className={`relative flex mx-7 p-3 items-center gap-x-2 mb-3
+                                <div key={navigation.id} className="relative flex flex-col">
+                                    <NavLink
+                                        key={navigation.id}
+                                        to={navigation.path}
+                                        onClick={(e) => {
+                                            e.preventDefault()
+                                            setCollapsible({
+                                                ...collapsible,
+                                                collapsed: false
+                                            })
+                                            if (navigation.subLinks.length > 0) {
+                                                setCollapsible({
+                                                    ...collapsible,
+                                                    path: navigation.path,
+                                                    collapsed: !collapsible.collapsed
+                                                })
+                                                navigate(navigation.path)
+                                                return
+                                            }
+                                            setShowSidebar(false)
+                                            navigate(navigation.path)
+                                        }}
+                                        className={`relative flex mx-7 p-3 items-center gap-x-2 mb-3
                                     ${location.pathname === navigation.path ? activeLink : defaultLink}
                                     `}
-                                >   <span>{navigation.icon}</span>
-                                    <span className="text-sm">{navigation.title}</span>
-                                    {location.pathname === navigation.path && <span className="absolute rounded-r-xl h-7 w-1 bg-primary -left-7"></span>}
-                                </NavLink>
+                                    >
+                                        <>
+                                            <span>{navigation.icon}</span>
+                                            <span className="text-sm">{navigation.title}</span>
+                                            {navigation.subLinks.length > 0 && <span
+                                            >
+                                                {
+                                                    collapsible.path === navigation.path && collapsible.collapsed ?
+                                                        <ChevronUp className={`h-4 w-4 absolute right-2 top-3.5 text-gray-500 ${location.pathname === navigation.path && 'text-white'}`} /> :
+                                                        <ChevronDown className={`h-4 w-4 absolute right-2 top-3.5 text-gray-500 ${location.pathname === navigation.path && 'text-white'}`} />
+
+                                                }
+                                            </span>}
+                                        </>
+                                        {location.pathname === navigation.path && <span className="absolute rounded-r-xl h-7 w-1 bg-primary -left-7"></span>}
+                                    </NavLink>
+                                    {/* Sublinks */}
+                                    <div className={cn(
+                                        `h-0 flex flex-col gap-y-3 transition-all ease-in-out overflow-hidden`,
+                                        collapsible.path === navigation.path && collapsible.collapsed && 'flex h-full'
+                                    )}>
+                                        {
+                                            navigation.subLinks.map((link) => (
+                                                <div key={link.id} className={`relative last:mb-3`}>
+                                                    <Link
+                                                        key={link.path}
+                                                        to={link.path}
+                                                        className={cn(
+                                                            `pl-20 text-sm`,
+                                                            location.pathname === link.path && 'text-primary'
+                                                        )}
+                                                    >
+                                                        {link.title}
+                                                    </Link>
+                                                    {location.pathname === link.path && <span className="absolute rounded-r-xl h-7 w-1 bg-primary left-0"></span>}
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
                             ))
                         }
                     </div>
@@ -148,7 +205,7 @@ const Sidebar = ({ setShowSidebar, showSidebar }: IProps) => {
                             // variant="outline"
                             onClick={() => navigate('/')}
                         >
-                            <LogOutIcon className="h-3 w-3 mr-1"/>
+                            <LogOutIcon className="h-3 w-3 mr-1" />
                             Logout
                         </Button>
                     </div>

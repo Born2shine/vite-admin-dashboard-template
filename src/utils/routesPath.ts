@@ -3,7 +3,7 @@ const routesPath = {
     DASHBOARD: '/dashboard',
     KYC: '/kyc',
     SUPPORT: '/support',
-    SETTLEMEMT: '/settlements',
+    SETTLEMENTS: '/settlements',
     ALL_SETTLEMENTS: '/all-settlements',
     RECONCILIATION: '/reconciliation',
     USERS: '/users',
