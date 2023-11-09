@@ -6,7 +6,7 @@ const Overview = () => {
   
   return (
     <section className="">
-      <p className="text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, eos? <Link to={CASH_REQUEST}>Cash Request</Link>
+      <p className="text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, eos? <Link to={CASH_REQUEST} className="text-primary">Followers</Link>
       </p>
     </section>
   )

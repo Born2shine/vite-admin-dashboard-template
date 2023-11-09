@@ -98,7 +98,6 @@ const Sidebar = ({ setShowSidebar, showSidebar }: IProps) => {
 
     const { width } = useWindowSize()
     const navigate = useNavigate()
-    console.log(collapsible)
     const defaultLink = 'block text-grey-500 pl-8 dark:text-slate-400 dark:hover:text-slate-300 hover:bg-secondary hover:text-whit hover:p-3 hover:pl-8 hover:rounded-[8px]'
     const activeLink = 'block text-white bg-primary rounded-[8px] pl-8 dark:text-slate-300'
 

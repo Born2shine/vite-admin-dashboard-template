@@ -1,4 +1,4 @@
-import { Bell, ChevronDown, Menu } from "lucide-react";
+import { AlignRight, Bell, ChevronDown, Menu } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import ProfileDropdownMenu from "@/pages/protected/components/profile-dropdown-menu";
 import NotificationModal from "./modals/notification-modal";
@@ -17,7 +17,7 @@ const Topnav = ({ setShowSidebar }: IProps) => {
                         return !prevState
                     })}
                 >
-                    <Menu className="h-5 w-5 text-gray-600" />
+                    <AlignRight className="h-5 w-5 text-gray-600" />
                 </span>
                 <div>
                     <h2 className="hidden font-medium text-xl lg:block">Welcome, Friday</h2>
