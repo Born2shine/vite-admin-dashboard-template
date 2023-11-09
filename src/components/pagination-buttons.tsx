@@ -8,7 +8,7 @@ interface PagePaginationButtonsProps {
     loading?: boolean;
 }
 
-const PaginationButtons = ({totalPages, currentPage, setCurrentPage, loading}: PagePaginationButtonsProps) => {
+const PaginationButtons = ({totalPages, setCurrentPage}: PagePaginationButtonsProps) => {
 
     const handlePageChange = (selected: number) => {
         setCurrentPage(selected + 1)

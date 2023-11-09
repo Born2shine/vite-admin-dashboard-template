@@ -1,4 +1,4 @@
-import { AlignRight, Bell, ChevronDown, Menu } from "lucide-react";
+import { AlignRight, Bell, ChevronDown } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import ProfileDropdownMenu from "@/pages/protected/components/profile-dropdown-menu";
 import NotificationModal from "./modals/notification-modal";
