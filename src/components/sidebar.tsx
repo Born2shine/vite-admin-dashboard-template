@@ -122,7 +122,7 @@ const Sidebar = ({ setShowSidebar, showSidebar }: IProps) => {
                     <img src={images.logo} alt="" />
                 </div>
                 <section className="mt-9 h-[85vh] flex flex-col justify-between bg-secondary-foregroun">
-                    <div className="h-[60%] overflow-y-scroll">
+                    <div className="flex-1 h-[60% overflow-y-scroll">
                         {
                             navigationPath.map((navigation) => (
                                 <div key={navigation.id} className="relative flex flex-col">
