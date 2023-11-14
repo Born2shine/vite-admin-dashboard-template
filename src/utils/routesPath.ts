@@ -12,6 +12,7 @@ const routesPath = {
     SETTINGS: '/settings',
     APP_FEEDBACK: '/app-feedback',
     CASH_REQUEST: '/cash-request',
+    MY_COMPONENT: '/components',
 }
 
 export default routesPath

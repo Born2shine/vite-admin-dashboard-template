@@ -3,7 +3,7 @@ import { routesPath } from "@/utils";
 import useWindowSize from "@/utils/hooks/useWindowSize";
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { ArrowLeftRight, ChevronDown, ChevronUp, CircleDollarSign, LayoutDashboard, LogOutIcon, Mail, Settings, Star, TrendingUp, User, Users } from "lucide-react"
+import { ArrowLeftRight, ChevronDown, ChevronUp, CircleDollarSign, Component, LayoutDashboard, LogOutIcon, Mail, Settings, Star, TrendingUp, User, Users } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
@@ -13,7 +13,7 @@ interface IProps {
     setShowSidebar: (state: any) => any;
 }
 
-const { DASHBOARD, KYC, SUPPORT, SETTLEMENTS, ALL_SETTLEMENTS, RECONCILIATION, USERS, REPORT, TRANSACTIONS, SETTINGS, APP_FEEDBACK } = routesPath
+const { DASHBOARD, KYC, SUPPORT, SETTLEMENTS, ALL_SETTLEMENTS, RECONCILIATION, USERS, REPORT, TRANSACTIONS, SETTINGS, APP_FEEDBACK, MY_COMPONENT } = routesPath
 
 const navigationPath = [
     {
@@ -88,6 +88,13 @@ const navigationPath = [
         title: 'App Feedback',
         icon: <Star className="w-4 h-4" />,
         path: APP_FEEDBACK,
+        subLinks: []
+    },
+    {
+        id: 10,
+        title: 'Components',
+        icon: <Component className="w-4 h-4" />,
+        path: MY_COMPONENT,
         subLinks: []
     },
 
@@ -178,7 +185,7 @@ const Sidebar = ({ setShowSidebar, showSidebar }: IProps) => {
                                                         key={link.path}
                                                         to={link.path}
                                                         className={cn(
-                                                            `pl-20 text-sm`,
+                                                            `pl-20 text-sm hover:text-primary`,
                                                             location.pathname === link.path && 'text-primary'
                                                         )}
                                                     >
