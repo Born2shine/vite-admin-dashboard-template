@@ -1,7 +1,7 @@
 const routesPath = {
     LOGIN: '/',
     DASHBOARD: '/dashboard',
-    KYC: '/kyc',
+    PRODUCTS: '/products',
     SUPPORT: '/support',
     SETTLEMENTS: '/settlements',
     ALL_SETTLEMENTS: '/all-settlements',

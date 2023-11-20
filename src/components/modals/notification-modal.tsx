@@ -9,12 +9,13 @@ import {
 
   
 interface NotificationModalProps {
-    trigger: React.ReactNode
+    trigger: React.ReactNode,
+    showModal: boolean
 }
 
-const NotificationModal = ({ trigger }: NotificationModalProps) => {
+const NotificationModal = ({ trigger, showModal }: NotificationModalProps) => {
     return (
-        <Sheet>
+        <Sheet open={showModal}>
             <SheetTrigger>{trigger}</SheetTrigger>
             <SheetContent>
                 <SheetHeader>

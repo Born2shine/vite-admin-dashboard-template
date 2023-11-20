@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 
 const useDataFetch = () => {
-    const API_URL = `https://api.github.com/users/charlesuwaje/followers?per_page=15`
+    const API_URL = `https://api.github.com/users/fabpot/followers?per_page=15`
     const totalPages = 300
     const [loading, setLoading] = useState(true)
     const [pages, setPages] = useState([])
