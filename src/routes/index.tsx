@@ -4,7 +4,7 @@ import { routesPath } from "@/utils"
 import { Route, Routes } from "react-router-dom"
 
 const AppRoute = () => {
-  const { DASHBOARD, CASH_REQUEST, KYC, SETTLEMENTS, ALL_SETTLEMENTS, RECONCILIATION } = routesPath
+  const { DASHBOARD, CASH_REQUEST, PRODUCTS, SETTLEMENTS, ALL_SETTLEMENTS, RECONCILIATION } = routesPath
 
   return (
     <>
@@ -12,7 +12,7 @@ const AppRoute = () => {
         <Route index element={<Login />} />
         <Route element={<DashboardLayout/>}>
           <Route path={DASHBOARD} element={<Overview />} />
-          <Route path={KYC} element={<KycCustomer />} />
+          <Route path={PRODUCTS} element={<KycCustomer />} />
           <Route path={CASH_REQUEST} element={<CashRequest />} />
           <Route path={SETTLEMENTS} element={<Settlements />} />
           <Route path={ALL_SETTLEMENTS} element={<Settlements />} />

@@ -1,7 +1,7 @@
 const routesPath = {
     LOGIN: '/',
     DASHBOARD: '/dashboard',
-    KYC: '/kyc',
+    PRODUCTS: '/products',
     SUPPORT: '/support',
     SETTLEMENTS: '/settlements',
     ALL_SETTLEMENTS: '/all-settlements',
@@ -12,6 +12,7 @@ const routesPath = {
     SETTINGS: '/settings',
     APP_FEEDBACK: '/app-feedback',
     CASH_REQUEST: '/cash-request',
+    MY_COMPONENT: '/components',
 }
 
 export default routesPath

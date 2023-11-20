@@ -74,6 +74,13 @@ module.exports = {
         shadowVariantOne: "box-shadow: -2px 0px 50px -10px rgba(0,0,0,0.1)"
       }
     },
+    fontFamily: {
+      GilroyBold: ["Gilroy-Bold"],
+      GilroyHeavy: ["Gilroy-Heavy"],
+      GilroyMedium: ["Gilroy-Medium"],
+      GilroyLight: ["Gilroy-Light"],
+      GilroyRegular: ["Gilroy-Regular"],
+    }
   },
   plugins: [require("tailwindcss-animate")],
 }

@@ -1,5 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600&display=swap');
 
+@font-face {
+  font-family: "Gilroy-Bold";
+  src: url('./assets/fonts/Gilroy-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Gilroy-Heavy";
+  src: url('./assets/fonts/Gilroy-Heavy.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Gilroy-Light";
+  src: url('./assets/fonts/Gilroy-Light.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Gilroy-Medium";
+  src: url('./assets/fonts/Gilroy-Medium.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Gilroy-Regular";
+  src: url('./assets/fonts/Gilroy-Regular.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+}
+
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,7 +44,7 @@ body,
 }
 
 body {
-  font-family: 'Rubik', sans-serif !important;
+  font-family: "Gilroy-Regular";
   font-weight: 300 !important;
 }
  
@@ -24,9 +57,9 @@ body {
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
+    --primary: 245 100% 30%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
+    --secondary: 162 75% 69%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -39,6 +72,7 @@ body {
     --ring: 221.2 83.2% 53.3%;
     --radius: 8px;
   }
+  /* #00238c blue */
  
   .dark {
     --background: 222.2 84% 4.9%;

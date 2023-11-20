@@ -26,7 +26,7 @@ const ProfileDropdownMenu = ({ trigger }: DropdownMenuProps) => {
                 {/* <DropdownMenuSeparator /> */}
                 <DropdownMenuItem className="cursor-pointer p-4 font-normal px-6 border-b border-b-gray-100">
                     <User className="w-4 h-4 mr-2" />
-                    <span>Profile</span>
+                    <span>My Profile</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="cursor-pointer p-4 font-normal px-6 border-b border-b-gray-100">
                     <Settings className="w-4 h-4 mr-2" />

@@ -1,107 +1,358 @@
-import { images } from "@/assets";
+import { cn } from "@/lib/utils";
 import { routesPath } from "@/utils";
 import useWindowSize from "@/utils/hooks/useWindowSize";
-import { useEffect, useState } from "react";
+import { ArrowLeftRight, BarChart2, BookText, Box, ChevronRight, ClipboardList, Component, LayoutDashboard, LogOutIcon, Package, PlusSquare, Settings, ShoppingBag, ShoppingCart, Smartphone, Star, Tag, Truck, Users, Users2 } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { ArrowLeftRight, ChevronDown, ChevronUp, CircleDollarSign, LayoutDashboard, LogOutIcon, Mail, Settings, Star, TrendingUp, User, Users } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
+import { images } from "@/assets";
+import { getStorageItem, setStorageItem } from "@/utils/hooks/useLocalStorage";
 
 interface IProps {
     showSidebar: any;
     setShowSidebar: (state: any) => any;
 }
 
-const { DASHBOARD, KYC, SUPPORT, SETTLEMENTS, ALL_SETTLEMENTS, RECONCILIATION, USERS, REPORT, TRANSACTIONS, SETTINGS, APP_FEEDBACK } = routesPath
+const { DASHBOARD, PRODUCTS, SUPPORT, SETTLEMENTS, ALL_SETTLEMENTS, RECONCILIATION, USERS, REPORT, TRANSACTIONS, SETTINGS, APP_FEEDBACK, MY_COMPONENT } = routesPath
 
 const navigationPath = [
     {
-        id: 1,
-        title: 'Dashboard',
-        icon: <LayoutDashboard className="w-4 h-4" />,
-        path: DASHBOARD,
-        subLinks: []
-    },
-    {
-        id: 2,
-        title: 'KYC',
-        icon: <Users className="w-4 h-4" />,
-        path: KYC,
-        subLinks: []
-    },
-    {
-        id: 3,
-        title: 'Support',
-        icon: <Mail className="w-4 h-4" />,
-        path: SUPPORT,
-        subLinks: []
-    },
-    {
-        id: 4,
-        title: 'Settlements',
-        icon: <CircleDollarSign className="w-4 h-4" />,
-        path: SETTLEMENTS,
-        subLinks: [
+        id: crypto.randomUUID().toString(),
+        title: 'Main',
+        links: [
             {
-                id: 1,
-                title: 'Settlements',
-                path: ALL_SETTLEMENTS,
+                id: crypto.randomUUID().toString(),
+                title: 'Dashboard',
+                accessor: 'Dashboard',
+                icon: <LayoutDashboard className="w-4 h-4" />,
+                path: DASHBOARD,
+                collapsed: false,
+                subLinks: []
+            },
+            // {
+            //     id: crypto.randomUUID().toString(),
+            //     title: 'Application',
+            //     accessor: 'Application',
+            //     icon: <Smartphone className="w-4 h-4" />,
+            //     path: 'DASH',
+            //     collapsed: false,
+            //     subLinks: []
+            // }
+        ],
+    },
+    {
+        id: crypto.randomUUID().toString(),
+        title: 'Inventory',
+        links: [
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Products',
+                accessor: 'Products',
+                icon: <Box className="w-4 h-4" />,
+                path: PRODUCTS,
+                collapsed: false,
+                subLinks: []
             },
             {
-                id: 2,
-                title: 'Reconciliation',
-                path: RECONCILIATION,
+                id: crypto.randomUUID().toString(),
+                title: 'Create Product',
+                accessor: 'Create Product',
+                icon: <PlusSquare className="w-4 h-4" />,
+                path: 'Create Product',
+                collapsed: false,
+                subLinks: []
+            },
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Category',
+                accessor: 'Category',
+                icon: <Package className="w-4 h-4" />,
+                path: 'Category',
+                collapsed: false,
+                subLinks: []
+            },
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Brand',
+                accessor: 'Brand',
+                icon: <Tag className="w-4 h-4" />,
+                path: 'Brand',
+                collapsed: false,
+                subLinks: []
             }
-        ]
+        ],
     },
     {
-        id: 5,
-        title: 'Users',
-        icon: <User className="w-4 h-4" />,
-        path: USERS,
-        subLinks: []
+        id: crypto.randomUUID().toString(),
+        title: 'Sales',
+        links: [
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Sales',
+                accessor: 'Sales',
+                icon: <ShoppingCart className="w-4 h-4" />,
+                path: SUPPORT,
+                collapsed: false,
+                subLinks: []
+            },
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Shipment',
+                accessor: 'Shipment',
+                icon: <Truck className="w-4 h-4" />,
+                path: 'SUPPORTSS',
+                collapsed: false,
+                subLinks: []
+            },
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Customers',
+                accessor: 'Customers',
+                icon: <Users className="w-4 h-4" />,
+                path: 'SUPPORTs',
+                collapsed: false,
+                subLinks: []
+            },
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Pos',
+                accessor: 'Pos',
+                icon: <ShoppingBag className="w-4 h-4" />,
+                path: 'POS',
+                collapsed: false,
+                subLinks: []
+            },
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Invoices',
+                accessor: 'Invoices',
+                icon: <ClipboardList className="w-4 h-4" />,
+                path: 'SUPPORT',
+                collapsed: false,
+                subLinks: []
+            },
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Sales Return',
+                accessor: 'Sales Return',
+                icon: <ArrowLeftRight className="w-4 h-4" />,
+                path: 'SUPPORT',
+                collapsed: false,
+                subLinks: []
+            },
+        ],
     },
     {
-        id: 6,
+        id: crypto.randomUUID().toString(),
+        title: 'Purchases',
+        links: [
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Purchases',
+                accessor: 'Purchases',
+                icon: <ShoppingBag className="w-4 h-4" />,
+                path: '#Purchases',
+                collapsed: false,
+                subLinks: [
+                    {
+                        id: crypto.randomUUID().toString(),
+                        title: 'Vendor',
+                        accessor: 'Vendor',
+                        path: ALL_SETTLEMENTS,
+                    },
+                    {
+                        id: crypto.randomUUID().toString(),
+                        title: 'Purchase Order',
+                        accessor: 'Purchase Order',
+                        path: RECONCILIATION,
+                    },
+                ]
+            }
+        ],
+    },
+    {
+        id: crypto.randomUUID().toString(),
+        title: 'Expenses',
+        links: [
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Expenses',
+                accessor: 'Expenses',
+                icon: <BookText className="w-4 h-4" />,
+                path: USERS,
+                collapsed: false,
+                subLinks: []
+            }
+        ],
+    },
+    {
+        id: crypto.randomUUID().toString(),
         title: 'Report',
-        icon: <TrendingUp className="w-4 h-4" />,
-        path: REPORT,
-        subLinks: []
+        links: [
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Report',
+                icon: <BarChart2 className="w-4 h-4" />,
+                path: '#Report',
+                accessor: 'Report',
+                collapsed: false,
+                subLinks: [
+                    {
+                        id: crypto.randomUUID().toString(),
+                        title: 'Sales Report',
+                        accessor: 'Sales Report',
+                        path: ALL_SETTLEMENTS,
+                    },
+                    {
+                        id: crypto.randomUUID().toString(),
+                        title: 'Product Report',
+                        accessor: 'Product Report',
+                        path: 'RECONCILIATION3',
+                    },
+                    {
+                        id: crypto.randomUUID().toString(),
+                        title: 'Purchase Report',
+                        accessor: 'Purchase Report',
+                        path: 'RECONCILIATION2',
+                    },
+                    {
+                        id: crypto.randomUUID().toString(),
+                        title: 'Invoice Report',
+                        accessor: 'Invoice Report',
+                        path: 'RECONCILIATION1',
+                    },
+                    {
+                        id: crypto.randomUUID().toString(),
+                        title: 'User Report',
+                        accessor: 'User Report',
+                        path: 'RECONCILIATION',
+                    },
+                ]
+            }
+        ],
     },
     {
-        id: 7,
-        title: 'Transactions',
-        icon: <ArrowLeftRight className="w-4 h-4" />,
-        path: TRANSACTIONS,
-        subLinks: []
+        id: crypto.randomUUID().toString(),
+        title: 'Manage Users',
+        links: [
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Manage Users',
+                accessor: 'Manage Users',
+                icon: <Users2 className="w-4 h-4" />,
+                path: TRANSACTIONS,
+                collapsed: false,
+                subLinks: []
+            }
+        ],
     },
     {
-        id: 8,
+        id: crypto.randomUUID().toString(),
+        title: 'Components',
+        links: [
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Components',
+                accessor: 'Components',
+                icon: <Component className="w-4 h-4" />,
+                path: MY_COMPONENT,
+                collapsed: false,
+                subLinks: []
+            }
+        ],
+    },
+    {
+        id: crypto.randomUUID().toString(),
         title: 'Settings',
-        icon: <Settings className="w-4 h-4" />,
-        path: SETTINGS,
-        subLinks: []
-    },
-    {
-        id: 9,
-        title: 'App Feedback',
-        icon: <Star className="w-4 h-4" />,
-        path: APP_FEEDBACK,
-        subLinks: []
+        links: [
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Settings',
+                accessor: 'Settings',
+                icon: <Settings className="w-4 h-4" />,
+                path: '#Settings',
+                collapsed: false,
+                subLinks: [
+                    {
+                        id: crypto.randomUUID().toString(),
+                        title: 'General Settings',
+                        accessor: 'General Settings',
+                        path: ALL_SETTLEMENTS,
+                    },
+                    {
+                        id: crypto.randomUUID().toString(),
+                        title: 'Email Settings',
+                        accessor: 'Email Settings',
+                        path: RECONCILIATION,
+                    },
+                    {
+                        id: crypto.randomUUID().toString(),
+                        title: 'Payment Settings',
+                        accessor: 'Payment Settings',
+                        path: RECONCILIATION,
+                    },
+                    {
+                        id: crypto.randomUUID().toString(),
+                        title: 'Currency Settings',
+                        accessor: 'Currency Settings',
+                        path: RECONCILIATION,
+                    },
+                    {
+                        id: crypto.randomUUID().toString(),
+                        title: 'Tax Rates',
+                        accessor: 'Tax Rates',
+                        path: RECONCILIATION,
+                    },
+                ]
+            },
+            {
+                id: crypto.randomUUID().toString(),
+                title: 'Logout',
+                accessor: 'Logout',
+                icon: <LogOutIcon className="w-4 h-4" />,
+                path: '/',
+                collapsed: false,
+                subLinks: []
+            }
+        ],
     },
 
 ]
 
+
+
 const Sidebar = ({ setShowSidebar, showSidebar }: IProps) => {
-    const [collapsible, setCollapsible] = useState({ path: '', collapsed: false })
+    const collapsibleData = getStorageItem('collapsible')
+    const activeNavData = getStorageItem('activeNav')
+
+    const [navigationState, setNavigationState] = useState(navigationPath);
+    const [collapsible, setCollapsible] = useState({ path: "/dashboard", collapsed: false })
+    const [activeNav, setActiveNav] = useState('Dashboard')
+
+    const toggleCollapsed = (linkId: string) => {
+        const currentState = [...navigationState]
+        let newState = currentState.map(data => {
+            let links = data.links.map(link => {
+                return link.id === linkId ? { ...link, collapsed: !link.collapsed } : link
+            })
+            return { ...data, links: links }
+        })
+        setNavigationState(newState)
+    };
+
+    const NAVIGATION_MENU = useMemo(() => navigationState, [navigationState])
+    // console.log(navigationState)
 
     const { width } = useWindowSize()
     const navigate = useNavigate()
-    const defaultLink = 'block text-grey-500 pl-8 dark:text-slate-400 dark:hover:text-slate-300 hover:bg-secondary hover:text-whit hover:p-3 hover:pl-8 hover:rounded-[8px]'
-    const activeLink = 'block text-white bg-primary rounded-[8px] pl-8 dark:text-slate-300'
+
+    const normal = 'relative p-2.5 block flex items-center gap-x-2'
+    const defaultLink = normal + ' text-grey-500 pl-4 dark:text-slate-400 dark:hover:text-slate-300 hover:text-primary hover:p-2.5 hover:pl-4'
+    const activeLink = normal + ' text-white bg-primary rounded-[4px] pl-4 dark:text-slate-300'
 
     const location = useLocation();
+
 
     useEffect(() => {
         if (width < 768) {
@@ -112,102 +363,134 @@ const Sidebar = ({ setShowSidebar, showSidebar }: IProps) => {
         }
     }, [width])
 
+    // Set the default active link
+    // If store has active link, set active link to store link
+    useEffect(() => {
+        if (collapsibleData && activeNavData) {
+            setActiveNav(activeNavData)
+            setCollapsible(collapsibleData)
+            return
+        }
+        setStorageItem('collapsible', collapsible)
+        setStorageItem('activeNav', activeNav)
+    }, [])
+
+    // Update store link to selected link
+    useEffect(() => {
+        setStorageItem('collapsible', collapsible)
+        setStorageItem('activeNav', activeNav)
+    }, [collapsible, activeNav])
+
     return (
         <>
             {showSidebar && width < 768 && <div className='absolute w-screen h-screen left-0 bg-neutral-50/5 z-20 cursor-pointer'
                 onClick={() => setShowSidebar(!showSidebar)}
             ></div>}
-            <nav className={`fixed top-0 left-0 h-screen bg-white shadow-sm w-[14rem] x-5 py-6 z-30 transition-all duration-500 ease-in-out md:relative md:x-7 lg:w-[16rem] ${showSidebar || width >= 768 ? 'translate-x-0' : '-translate-x-full'} dark:bg-gray-800`}>
-                <div className="flex justify-center">
+            <nav className={`fixed top-0 left-0 h-screen bg-white w-[14rem] pt-4 z-30 transition-all duration-500 ease-in-out border-r md:relative md:x-7 lg:w-[16rem] ${showSidebar || width >= 768 ? 'translate-x-0' : '-translate-x-full'} dark:bg-gray-800`}>
+                <div className="flex justify-center pl5 border-b pb-4">
                     <img src={images.logo} alt="" />
+                    {/* <span className="text-2xl text-primary font-GilroyBold tracking-widest"> NATOPAY <sup></sup></span> */}
                 </div>
-                <section className="mt-9 h-[85vh] flex flex-col justify-between bg-secondary-foregroun">
-                    <div className="h-[60%] overflow-y-scroll">
+                <section className="mt-4 h-[85vh] flex flex-col justify-between">
+                    <div className="flex-1 h-[60% overflow-y-scroll">
                         {
-                            navigationPath.map((navigation) => (
-                                <div key={navigation.id} className="relative flex flex-col">
-                                    <NavLink
-                                        key={navigation.id}
-                                        to={navigation.path}
-                                        onClick={(e) => {
-                                            e.preventDefault()
-                                            setCollapsible({
-                                                ...collapsible,
-                                                collapsed: false
-                                            })
-                                            if (navigation.subLinks.length > 0) {
-                                                setCollapsible({
-                                                    ...collapsible,
-                                                    path: navigation.path,
-                                                    collapsed: !collapsible.collapsed
-                                                })
-                                                navigate(navigation.path)
-                                                return
-                                            }
-                                            setShowSidebar(false)
-                                            navigate(navigation.path)
-                                        }}
-                                        className={`relative flex mx-7 p-3 items-center gap-x-2 mb-3
-                                    ${location.pathname === navigation.path ? activeLink : defaultLink}
-                                    `}
-                                    >
-                                        <>
-                                            <span>{navigation.icon}</span>
-                                            <span className="text-sm">{navigation.title}</span>
-                                            {navigation.subLinks.length > 0 && <span
-                                            >
-                                                {
-                                                    collapsible.path === navigation.path && collapsible.collapsed ?
-                                                        <ChevronUp className={`h-4 w-4 absolute right-2 top-3.5 text-gray-500 ${location.pathname === navigation.path && 'text-white'}`} /> :
-                                                        <ChevronDown className={`h-4 w-4 absolute right-2 top-3.5 text-gray-500 ${location.pathname === navigation.path && 'text-white'}`} />
+                            NAVIGATION_MENU?.map((navigation) => (
+                                <div key={navigation.id} className="relative pb-4">
+                                    <span className="block font-normal pl-5 pb-3 text-sm">{navigation.title}</span>
+                                    {
+                                        navigation?.links?.map((link) => (
+                                            <div className="mx-7" key={link.id}>
+                                                <NavLink
+                                                    key={link.id}
+                                                    to={link?.path}
+                                                    onClick={(e) => {
+                                                        e.preventDefault()
+                                                        setCollapsible({
+                                                            ...collapsible,
+                                                            path: link.path,
+                                                            collapsed: false
+                                                        })
+                                                        toggleCollapsed(link.id)
+                                                        if (link.subLinks.length > 0) {
+                                                            setCollapsible({
+                                                                ...collapsible,
+                                                                path: link.path,
+                                                                collapsed: !collapsible.collapsed
+                                                            })
+                                                            setActiveNav(link.accessor)
+                                                            return
+                                                        }
+                                                        setActiveNav(link.accessor)
+                                                        setShowSidebar(false)
+                                                        navigate(link.path)
+                                                    }}
+                                                    className={cn(`relative p-2.5 items-center gap-x-2`,
+                                                        ((link?.path === collapsible?.path) || (link.accessor === activeNav && link.path === collapsible?.path)) ? activeLink : defaultLink
+                                                    )}
+                                                >
+                                                    <>
+                                                        <span>{link.icon}</span>
+                                                        <span className="text-sm md:text-[.95rem]">{link.title}</span>
+                                                        {link.subLinks.length > 0 && <span
+                                                        >
+                                                            <ChevronRight className={cn(`h-3.5 w-3.5 absolute right-2 top-3.5 text-gray-500 transition-all ease-in-out duration-300`,
+                                                                link.collapsed ? 'rotate-90' : 'rotate-0',
+                                                                link.accessor === activeNav ? 'text-white' : 'text-gray-500'
+                                                            )
+                                                            } />
 
-                                                }
-                                            </span>}
-                                        </>
-                                        {location.pathname === navigation.path && <span className="absolute rounded-r-xl h-7 w-1 bg-primary -left-7"></span>}
-                                    </NavLink>
-                                    {/* Sublinks */}
-                                    <div className={cn(
-                                        `h-0 flex flex-col gap-y-3 transition-all ease-in-out overflow-hidden`,
-                                        collapsible.path === navigation.path && collapsible.collapsed && 'flex h-full'
-                                    )}>
-                                        {
-                                            navigation.subLinks.map((link) => (
-                                                <div key={link.id} className={`relative last:mb-3`}>
-                                                    <Link
-                                                        key={link.path}
-                                                        to={link.path}
-                                                        className={cn(
-                                                            `pl-20 text-sm`,
-                                                            location.pathname === link.path && 'text-primary'
-                                                        )}
-                                                    >
-                                                        {link.title}
-                                                    </Link>
-                                                    {location.pathname === link.path && <span className="absolute rounded-r-xl h-7 w-1 bg-primary left-0"></span>}
+                                                        </span>}
+                                                    </>
+                                                    {/* {location.pathname === link.path && <span className="absolute h-7 w-1 bg-primary -left-7"></span>} */}
+                                                </NavLink>
+
+                                                <div className={cn(
+                                                    `h-0 transition-all ease-in-out duration-300 overflow-hidden`
+                                                )} style={{ height: link.collapsed ? `${2.3 * link.subLinks.length}rem` : '0' }}>
+                                                    <div className="flex flex-col gap-y-3">
+                                                        {
+                                                            link.subLinks.map((link) => (
+                                                                <div key={link.id} className={`first:pt-2 last:mb-3`}>
+                                                                    <Link
+                                                                        key={link.path}
+                                                                        to={link.path}
+                                                                        className={cn(
+                                                                            `relative pl-10 text-sm hover:text-primary`,
+                                                                            location.pathname === link.path && 'text-primary font-GilroyMedium'
+                                                                        )}
+                                                                    >
+                                                                        {link.title}
+                                                                        {<span className={cn("absolute h-1 w-1 rounded-full bg-gray-400 left-7 top-1 z-10",
+                                                                            location.pathname === link.path && 'bg-primary'
+                                                                        )}></span>}
+                                                                    </Link>
+                                                                </div>
+                                                            ))
+                                                        }
+                                                    </div>
                                                 </div>
-                                            ))
-                                        }
-                                    </div>
+                                            </div>
+                                        ))
+                                    }
+                                    <span className="block mt-2 border-b border-b-gray-100 w-[82%] mx-auto"></span>
                                 </div>
                             ))
                         }
                     </div>
-                    <div className="h-[30%] mx-6 md:mx-10 rounded-xl bg-white border flex flex-col items-center pt-4">
+                    {/* <div className="h-[30%] mx-6 md:mx-10 rounded-xl bg-white border flex flex-col items-center pt-4">
                         <Avatar className="w-16 h-16">
                             <AvatarImage src="https://github.com/shadcn.png" alt="@zpay" />
                             <AvatarFallback>ZTH</AvatarFallback>
                         </Avatar>
-                        <span className="block w-[8rem] text-sm text-center mt-3 text-gray-500 truncate">Friday Odoh</span>
+                        <span className="block w-[8rem] text-sm text-center mt-3 text-gray-500 truncate">Super Admin</span>
                         <Button
                             className="font-normal bg-background bg-none border border-red-500 h-7 px-7 rounded-[8px] mt-6 text-red-400 text-[11px] hover:bg-red-400 hover:text-white hover:border-white"
-                            // variant="outline"
                             onClick={() => navigate('/')}
                         >
                             <LogOutIcon className="h-3 w-3 mr-1" />
                             Logout
                         </Button>
-                    </div>
+                    </div> */}
                 </section>
             </nav>
         </>

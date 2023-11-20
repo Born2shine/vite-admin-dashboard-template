@@ -13,7 +13,7 @@ const DashboardLayout = () => {
                 <Sidebar setShowSidebar={setShowSidebar} showSidebar={showSidebar} />
                 <section className="md:mr-3 md:w-[calc(100vw_-_14rem)] lg:w-[calc(100vw_-_16rem)]">
                     <Topnav setShowSidebar={setShowSidebar} />
-                    <section className="h-screen overflow-y-scroll p-4 pt-20">
+                    <section className="h-screen overflow-y-scroll p-4 pt-24">
                         <Outlet/>
                     </section>
                 </section>
