@@ -1,9 +1,7 @@
 import { routesPath } from "@/utils"
-import { Book, CreditCard, DollarSign, Paperclip, Receipt, ShoppingBag, User } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Book, CreditCard, DollarSign, ShoppingBag } from "lucide-react"
 
 const Overview = () => {
-  const { CASH_REQUEST } = routesPath
 
   return (
     <section className="">

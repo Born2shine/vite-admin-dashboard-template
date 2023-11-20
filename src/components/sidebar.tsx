@@ -1,20 +1,18 @@
+import { images } from "@/assets";
 import { cn } from "@/lib/utils";
 import { routesPath } from "@/utils";
+import { getStorageItem, setStorageItem } from "@/utils/hooks/useLocalStorage";
 import useWindowSize from "@/utils/hooks/useWindowSize";
-import { ArrowLeftRight, BarChart2, BookText, Box, ChevronRight, ClipboardList, Component, LayoutDashboard, LogOutIcon, Package, PlusSquare, Settings, ShoppingBag, ShoppingCart, Smartphone, Star, Tag, Truck, Users, Users2 } from "lucide-react";
+import { ArrowLeftRight, BarChart2, BookText, Box, ChevronRight, ClipboardList, Component, LayoutDashboard, LogOutIcon, Package, PlusSquare, Settings, ShoppingBag, ShoppingCart, Tag, Truck, Users, Users2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
-import { images } from "@/assets";
-import { getStorageItem, setStorageItem } from "@/utils/hooks/useLocalStorage";
 
 interface IProps {
     showSidebar: any;
     setShowSidebar: (state: any) => any;
 }
 
-const { DASHBOARD, PRODUCTS, SUPPORT, SETTLEMENTS, ALL_SETTLEMENTS, RECONCILIATION, USERS, REPORT, TRANSACTIONS, SETTINGS, APP_FEEDBACK, MY_COMPONENT } = routesPath
+const { DASHBOARD, PRODUCTS, SUPPORT, ALL_SETTLEMENTS, RECONCILIATION, USERS, TRANSACTIONS, MY_COMPONENT } = routesPath
 
 const navigationPath = [
     {
