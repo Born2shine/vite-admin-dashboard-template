@@ -1,4 +1,3 @@
-import { routesPath } from "@/utils"
 import { Book, CreditCard, DollarSign, ShoppingBag } from "lucide-react"
 
 const Overview = () => {
